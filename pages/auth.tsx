@@ -1,8 +1,11 @@
 import { useCallback, useState } from "react";
 import Input from "@/components/Input";
+import axios from "axios";
+import { signIn } from 'next-auth/react'
+import { useRouter } from "next/router";
 
 const Auth = () => {
-
+    const router = useRouter();
     const [email, setEmail] = useState('');
     const [name, SetName] = useState('');
     const [password, SetPassword] = useState('');
@@ -12,6 +15,34 @@ const Auth = () => {
     const toggleVariant = useCallback(() => {
         setVariant((currientVariant) => currientVariant === 'login' ? 'register' : 'login');
     }, [])
+
+    const register = useCallback(async () => {
+        try {
+            await axios.post('/api/register', {
+                email,
+                name,
+                password
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+    }, [email, name, password])
+
+    const login = useCallback(async () => {
+        try {
+            await signIn('credentials', {
+                email,
+                password,
+                redirect: false,
+                callbackUrl: '/'
+              });
+
+              router.push('/')
+        } catch (error) {
+            console.log(error)
+        }
+    }, [email, password])
 
     return (
         <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-fixed bg-cover" >
@@ -49,11 +80,11 @@ const Auth = () => {
                                 value={password}
                             />
                         </div>
-                        <button className="bg-red-600 py-3  text-white rounded-md w-full mt-10 hover:bg-red-700 transition">
+                        <button onClick={variant === 'loign' ? login : login } className="bg-red-600 py-3  text-white rounded-md w-full mt-10 hover:bg-red-700 transition">
                             {variant === 'login' ? 'Login' : 'Criar Conta'}
                         </button>
                         <p className="text-neutral-500 mt-1">
-                            { variant === 'login' ? 'Primeira vez acessando?' : 'Já tem uma conta?'}
+                            {variant === 'login' ? 'Primeira vez acessando?' : 'Já tem uma conta?'}
                             <span onClick={toggleVariant} className="text-white ml-1 hover:underline cursor-pointer">
                                 {variant === 'login' ? 'Criar uma conta' : 'Login'}
                             </span>
