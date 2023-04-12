@@ -47,10 +47,9 @@ const Billboard = () => {
         ">
           {data?.description}
         </p>
-        <div className="flex flex-row items-center mt-3 md:mt-4 gap3" >
+        <div className="flex flex-row items-center mt-3 md:mt-4 gap-3" >
           <button
             className="
-              flex
               bg-white
               text-white
               bg-opacity-30
@@ -60,6 +59,8 @@ const Billboard = () => {
               w-auto
               text-xs lg:text-lg
               font-semibold
+              flex
+              flex-row
               items-center
               hover:bg-opacity-20
               transition
