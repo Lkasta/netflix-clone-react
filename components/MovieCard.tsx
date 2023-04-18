@@ -1,15 +1,19 @@
 import React from 'react';
+
+import { BsFillPlayBtnFill } from 'react-icons/bs';
+import FavoriteButton from './FavoriteButton';
+
 interface MovieCardProps {
-    data: Record<string, any>;
+  data: Record<string, any>;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({
-    data
+  data
 }) => {
-    return (
-        <div className='group bg-zinc-900 col-span relative h-[12vw]'>
-            <img
-                className='
+  return (
+    <div className='group bg-zinc-900 col-span relative h-[12vw]'>
+      <img
+        className='
                 cursor-pointer
                 object-cover
                 transition
@@ -22,9 +26,9 @@ const MovieCard: React.FC<MovieCardProps> = ({
                 w-full
                 h-[12vw]
             '
-                src={data.thumbnailUrl} alt="thumb" />
-            <div
-                className='
+        src={data.thumbnailUrl} alt="thumb" />
+      <div
+        className='
                     opacity-0
                     absolute
                     top-0
@@ -41,9 +45,9 @@ const MovieCard: React.FC<MovieCardProps> = ({
                     group-hover:translate-x-[2vw]
                     group-hover:opacity-100
                 '
-            >
-                <img
-                    className='
+      >
+        <img
+          className='
                     cursor-pointer
                     object-cover
                     transition
@@ -53,10 +57,10 @@ const MovieCard: React.FC<MovieCardProps> = ({
                     w-full
                     h-[12vw]
                 '
-                    src={data.thumbnailUrl} alt="thumb" />
-                <div className='
+          src={data.thumbnailUrl} alt="thumb" />
+        <div className='
                     z-10
-                    bg-zinc-100
+                    bg-zinc-800
                     p-2
                     lg:p-4
                     abslute
@@ -65,13 +69,42 @@ const MovieCard: React.FC<MovieCardProps> = ({
                     shadow-md
                     rounded-b-md+
                 '>
-                    <div className='flex flex-row items-center gap-3'> 
-                    {/* video: 3:03:28 */}
-                    </div>
-                </div>
+          <div className='flex flex-row items-center gap-3'>
+            <div
+              className='
+              cursor-pointer
+              w-6
+              h-6
+              lg:w-10
+              lg:h-10
+              bg-white
+              rounded-full
+              flex
+              justify-center
+              items-center
+              transition
+              hover:bg-neutral-300
+              '
+              onClick={() => {}}>
+              <BsFillPlayBtnFill size={30} />
             </div>
+            <FavoriteButton movieId={data?.id}/>
+          </div>
+          <p className='text-green-400 font-semibold mt-4'>
+            New <span className='text-white'>2023</span>
+          </p>
+
+          <div className='flex flex-row mt-4 gap-2 items-center'>
+            <p className='text-white text-[10px] lg:text-sm'>{data.duration}</p>
+          </div>
+          <div className='flex flex-row mt-4 gap-2 items-center'>
+            <p className='text-white text-[10px] lg:text-sm'>{data.genre}</p>
+          </div>
+
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default MovieCard;
