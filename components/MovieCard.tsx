@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { BsFillPlayBtnFill } from 'react-icons/bs';
+import { BsFillPlayFill } from 'react-icons/bs';
 import FavoriteButton from './FavoriteButton';
 import useInfoModal from "@/hooks/useInfoModal";
 import { BiChevronDown } from 'react-icons/bi';
@@ -90,7 +90,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
               hover:bg-neutral-300
               '
               onClick={() => { router.push(`watch/${data.id}`) }}>
-              <BsFillPlayBtnFill size={30} />
+              <BsFillPlayFill size={30} />
             </div>
             <FavoriteButton movieId={data?.id} />
             <div
